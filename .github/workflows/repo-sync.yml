@@ -1,0 +1,22 @@
+# File: .github/workflows/repo-sync.yml
+
+on:
+  schedule:
+  - cron:  "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - name: repo-sync
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: https://git.cryptomilk.org/projects/cmocka.git
+        source_branch: "*"
+        destination_branch: "*"
+        sync_tags: "true"
+        github_token: ${{ secrets.REPO_SYNC_PAT }}
