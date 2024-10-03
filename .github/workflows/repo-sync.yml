@@ -1,4 +1,10 @@
-# File: .github/workflows/repo-sync.yml
+## @file
+# Sync cmocka repo to local repo.
+#
+# Copyright (c) 2024, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
 
 on:
   schedule:
