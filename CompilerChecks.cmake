@@ -95,6 +95,7 @@ if (UNIX)
     if (PICKY_DEVELOPER)
         add_c_compiler_flag("-Wno-error=deprecated-declarations" SUPPORTED_COMPILER_FLAGS)
         add_c_compiler_flag("-Wno-error=tautological-compare" SUPPORTED_COMPILER_FLAGS)
+        add_c_compiler_flag("-Wsign-conversion" SUPPORTED_COMPILER_FLAGS)
     endif()
 
     # Unset CMAKE_REQUIRED_FLAGS

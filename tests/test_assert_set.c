@@ -74,9 +74,9 @@ static void test_assert_uint_in_set_32(void **state)
 
     (void)state; /* unused */
 
-    assert_int_in_set(0, set, ARRAY_SIZE(set));
-    assert_int_in_set(1, set, ARRAY_SIZE(set));
-    assert_int_in_set(UINT32_MAX, set, ARRAY_SIZE(set));
+    assert_uint_in_set(0, set, ARRAY_SIZE(set));
+    assert_uint_in_set(1, set, ARRAY_SIZE(set));
+    assert_uint_in_set(UINT32_MAX, set, ARRAY_SIZE(set));
 }
 
 static void test_assert_uint_in_set_64(void **state)
@@ -85,7 +85,7 @@ static void test_assert_uint_in_set_64(void **state)
 
     (void)state; /* unused */
 
-    assert_int_in_set(UINT64_MAX, set, ARRAY_SIZE(set));
+    assert_uint_in_set(UINT64_MAX, set, ARRAY_SIZE(set));
 }
 
 static void test_assert_uint_not_in_set_64(void **state)

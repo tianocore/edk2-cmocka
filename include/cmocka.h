@@ -5279,9 +5279,9 @@ void assert_uint_in_range(uintmax_t value, uintmax_t minimum, uintmax_t maximum)
 #else
 #define assert_uint_in_range(value, minimum, maximum) \
     _assert_uint_in_range( \
-        cast_to_intmax_type(value), \
-        cast_to_intmax_type(minimum), \
-        cast_to_intmax_type(maximum), __FILE__, __LINE__)
+        cast_to_uintmax_type(value), \
+        cast_to_uintmax_type(minimum), \
+        cast_to_uintmax_type(maximum), __FILE__, __LINE__)
 #endif
 
 #ifdef DOXYGEN
