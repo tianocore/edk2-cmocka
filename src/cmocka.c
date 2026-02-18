@@ -2340,7 +2340,7 @@ static void __expect_int_in_set(const char *const function,
                                 const intmax_t values[],
                                 const size_t number_of_values,
                                 const CheckParameterValueData check_function,
-                                const size_t count)
+                                const intmax_t count)
 {
     struct check_integer_set *const check_integer_set =
         calloc(number_of_values,
@@ -2376,7 +2376,7 @@ static void __expect_float_in_set(const char *const function,
                                   const size_t number_of_values,
                                   const double epsilon,
                                   const CheckParameterValueData check_function,
-                                  const size_t count)
+                                  const intmax_t count)
 {
     struct check_float_set *const check_float_set =
         calloc(number_of_values,
@@ -2412,7 +2412,7 @@ static void __expect_uint_in_set(const char *const function,
                                  const uintmax_t values[],
                                  const size_t number_of_values,
                                  const CheckParameterValueData check_function,
-                                 const size_t count)
+                                 const intmax_t count)
 {
     struct check_unsigned_integer_set *const check_uint_set =
         calloc(number_of_values,
@@ -2447,7 +2447,7 @@ void _expect_int_in_set(const char *const function,
                         const size_t line,
                         const intmax_t values[],
                         const size_t number_of_values,
-                        const size_t count)
+                        const intmax_t count)
 {
     __expect_int_in_set(function,
                         parameter,
@@ -2465,7 +2465,7 @@ void _expect_uint_in_set(const char *const function,
                          const size_t line,
                          const uintmax_t values[],
                          const size_t number_of_values,
-                         const size_t count)
+                         const intmax_t count)
 {
     __expect_uint_in_set(function,
                          parameter,
@@ -2484,7 +2484,7 @@ void _expect_float_in_set(const char *const function,
                           const double values[],
                           const size_t number_of_values,
                           const double epsilon,
-                          const size_t count)
+                          const intmax_t count)
 {
     __expect_float_in_set(function,
                           parameter,
@@ -2504,7 +2504,7 @@ void _expect_float_not_in_set(const char *const function,
                               const double values[],
                               const size_t number_of_values,
                               const double epsilon,
-                              const size_t count)
+                              const intmax_t count)
 {
     __expect_float_in_set(function,
                           parameter,
@@ -2533,7 +2533,7 @@ void _expect_int_not_in_set(const char *const function,
                             const size_t line,
                             const intmax_t values[],
                             const size_t number_of_values,
-                            const size_t count)
+                            const intmax_t count)
 {
     __expect_int_in_set(function,
                         parameter,
@@ -2551,7 +2551,7 @@ void _expect_uint_not_in_set(const char *const function,
                              const size_t line,
                              const uintmax_t values[],
                              const size_t number_of_values,
-                             const size_t count)
+                             const intmax_t count)
 {
     __expect_uint_in_set(function,
                          parameter,
@@ -2672,7 +2672,7 @@ static void __expect_int_in_range(const char *const function,
                                   const intmax_t minimum,
                                   const intmax_t maximum,
                                   const CheckParameterValueData check_function,
-                                  const size_t count)
+                                  const intmax_t count)
 {
     struct check_integer_range *const check_integer_range =
         (struct check_integer_range *)malloc(sizeof(*check_integer_range));
@@ -2699,7 +2699,7 @@ static void __expect_uint_in_range(const char *const function,
                                    const uintmax_t minimum,
                                    const uintmax_t maximum,
                                    const CheckParameterValueData check_function,
-                                   const size_t count)
+                                   const intmax_t count)
 {
     struct check_unsigned_integer_range *const check_uint_range =
         (struct check_unsigned_integer_range *)malloc(
@@ -2736,7 +2736,7 @@ void _expect_int_in_range(const char *const function,
                           const size_t line,
                           const intmax_t minimum,
                           const intmax_t maximum,
-                          const size_t count)
+                          const intmax_t count)
 {
     __expect_int_in_range(function,
                           parameter,
@@ -2754,7 +2754,7 @@ void _expect_uint_in_range(const char *const function,
                            const size_t line,
                            const uintmax_t minimum,
                            const uintmax_t maximum,
-                           const size_t count)
+                           const intmax_t count)
 {
     __expect_uint_in_range(function,
                            parameter,
@@ -2783,7 +2783,7 @@ static void __expect_int_not_in_range(const char *const function,
                                       const intmax_t minimum,
                                       const intmax_t maximum,
                                       const CheckParameterValueData check_function,
-                                      const size_t count)
+                                      const intmax_t count)
 {
     struct check_integer_range *const check_integer_range =
         (struct check_integer_range *)malloc(sizeof(*check_integer_range));
@@ -2810,7 +2810,7 @@ static void __expect_uint_not_in_range(const char *const function,
                                        const uintmax_t minimum,
                                        const uintmax_t maximum,
                                        const CheckParameterValueData check_function,
-                                       const size_t count)
+                                       const intmax_t count)
 {
     struct check_unsigned_integer_range *const check_uint_range =
         (struct check_unsigned_integer_range *)malloc(
@@ -2837,7 +2837,7 @@ void _expect_int_not_in_range(const char *const function,
                               const size_t line,
                               const intmax_t minimum,
                               const intmax_t maximum,
-                              const size_t count)
+                              const intmax_t count)
 {
     __expect_int_not_in_range(function,
                               parameter,
@@ -2855,7 +2855,7 @@ void _expect_uint_not_in_range(const char *const function,
                                const size_t line,
                                const uintmax_t minimum,
                                const uintmax_t maximum,
-                               const size_t count)
+                               const intmax_t count)
 {
     __expect_uint_not_in_range(function,
                                parameter,
@@ -2987,7 +2987,7 @@ void _expect_int_value(const char *const function,
                        const char *const file,
                        const size_t line,
                        const intmax_t value,
-                       const size_t count)
+                       const intmax_t count)
 {
     _expect_check_data(function,
                   parameter,
@@ -3004,7 +3004,7 @@ void _expect_uint_value(const char *const function,
                         const char *const file,
                         const size_t line,
                         const uintmax_t value,
-                        const size_t count)
+                        const intmax_t count)
 {
     _expect_check_data(function,
                   parameter,
@@ -3047,7 +3047,7 @@ void _expect_int_not_value(const char *const function,
                            const char *const file,
                            const size_t line,
                            const intmax_t value,
-                           const size_t count)
+                           const intmax_t count)
 {
     _expect_check_data(function,
                        parameter,
@@ -3066,7 +3066,7 @@ void _expect_uint_not_value(const char *const function,
                             const char *const file,
                             const size_t line,
                             const uintmax_t value,
-                            const size_t count)
+                            const intmax_t count)
 {
     _expect_check_data(function,
                        parameter,

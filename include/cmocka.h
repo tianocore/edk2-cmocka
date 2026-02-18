@@ -2486,7 +2486,7 @@ void will_set_errno(#function, intmax_t value);
  * @see will_set_errno_always()
  * @see will_set_errno_maybe()
  */
-void will_set_errno_count(#function, intmax_t value, size_t count);
+void will_set_errno_count(#function, intmax_t value, intmax_t count);
 #else
 #define will_set_errno_count(function, value, count)    \
     _will_set_parameter(#function,                      \
@@ -2637,7 +2637,7 @@ void expect_check_count(function,
                         parameter,
                         CheckParameterValue check_function,
                         const void *check_data,
-                        size_t count);
+                        intmax_t count);
 #else
 #define expect_check_count(                                            \
     function, parameter, check_function, check_data, count)            \
@@ -2896,7 +2896,7 @@ void expect_check_data_count(function,
                              parameter,
                              CheckParameterValueData check_function,
                              CMockaValueData check_data,
-                             size_t count);
+                             intmax_t count);
 #else
 #define expect_check_data_count(function,          \
                                 parameter,         \
@@ -2973,7 +2973,7 @@ void expect_in_set(#function, #parameter, intmax_t value_array[]);
 /**
  * @deprecated Use expect_int_in_set_count() or expect_uint_in_set_count()
  */
-void expect_in_set_count(#function, #parameter, uintmax_t value_array[], size_t count);
+void expect_in_set_count(#function, #parameter, uintmax_t value_array[], intmax_t count);
 #else
 #define expect_in_set_count(function, parameter, value_array, count)        \
     do {                                                                    \
@@ -3009,7 +3009,7 @@ void expect_in_set_count(#function, #parameter, uintmax_t value_array[], size_t 
  *
  * @see check_expected().
  */
-void expect_int_in_set_count(#function, #parameter, intmax_t value_array[], size_t count);
+void expect_int_in_set_count(#function, #parameter, intmax_t value_array[], intmax_t count);
 #else
 #define expect_int_in_set_count(function, parameter, value_array, count) \
     _expect_int_in_set(cmocka_tostring(function),                        \
@@ -3040,7 +3040,7 @@ void expect_int_in_set_count(#function, #parameter, intmax_t value_array[], size
  *
  * @see check_expected().
  */
-void expect_uint_in_set_count(#function, #parameter, uintmax_t value_array[], size_t count);
+void expect_uint_in_set_count(#function, #parameter, uintmax_t value_array[], intmax_t count);
 #else
 #define expect_uint_in_set_count(function, parameter, value_array, count) \
     _expect_uint_in_set(cmocka_tostring(function),                        \
@@ -3071,7 +3071,7 @@ void expect_not_in_set(#function, #parameter, uintmax_t value_array[]);
 /**
  * @deprecated Use expect_int_not_in_set_count() or expect_uint_not_in_set_count()
  */
-void expect_not_in_set_count(#function, #parameter, uintmax_t value_array[], size_t count);
+void expect_not_in_set_count(#function, #parameter, uintmax_t value_array[], intmax_t count);
 #else
 #define expect_not_in_set_count(function, parameter, value_array, count)   \
     do {                                                                   \
@@ -3131,7 +3131,7 @@ void expect_int_not_in_set(#function, #parameter, intmax_t value_array[]);
 void expect_int_not_in_set_count(#function,
                                  #parameter,
                                  intmax_t value_array[],
-                                 size_t count);
+                                 intmax_t count);
 #else
 #define expect_int_not_in_set_count(function, parameter, value_array, count) \
     _expect_int_not_in_set(cmocka_tostring(function),                        \
@@ -3186,7 +3186,7 @@ void expect_uint_not_in_set(#function, #parameter, uintmax_t value_array[]);
 void expect_uint_not_in_set_count(#function,
                                   #parameter,
                                   uintmax_t value_array[],
-                                  size_t count);
+                                  intmax_t count);
 #else
 #define expect_uint_not_in_set_count(function, parameter, value_array, count) \
     _expect_uint_not_in_set(cmocka_tostring(function),                        \
@@ -3242,7 +3242,7 @@ void expect_float_in_set(#function, #parameter, double value_array[], double eps
  *
  * @see check_expected_float().
  */
-void expect_float_in_set_count(#function, #parameter, double value_array[], double epsilon, size_t count);
+void expect_float_in_set_count(#function, #parameter, double value_array[], double epsilon, intmax_t count);
 #else
 #define expect_float_in_set_count(function, parameter, value_array, epsilon, count) \
     _expect_float_in_set(cmocka_tostring(function),                                 \
@@ -3299,7 +3299,7 @@ void expect_float_not_in_set(#function, #parameter, double value_array[], double
  *
  * @see check_expected_float().
  */
-void expect_float_not_in_set_count(#function, #parameter, double value_array[], double epsilon, size_t count);
+void expect_float_not_in_set_count(#function, #parameter, double value_array[], double epsilon, intmax_t count);
 #else
 #define expect_float_not_in_set_count(function, parameter, value_array, epsilon, count) \
     _expect_float_not_in_set(cmocka_tostring(function),                                 \
@@ -3332,7 +3332,7 @@ void expect_in_range(#function, #parameter, uintmax_t minimum, uintmax_t maximum
 /**
  * @deprecated Use expect_int_in_range_count()
  */
-void expect_in_range_count(#function, #parameter, uintmax_t minimum, uintmax_t maximum, size_t count);
+void expect_in_range_count(#function, #parameter, uintmax_t minimum, uintmax_t maximum, intmax_t count);
 #else
 #define expect_in_range_count(function, parameter, minimum, maximum, count) \
     do {                                                                    \
@@ -3400,7 +3400,7 @@ void expect_int_in_range_count(#function,
 #parameter,
                                intmax_t minimum,
                                intmax_t maximum,
-                               size_t count);
+                               intmax_t count);
 #else
 #define expect_int_in_range_count(                   \
     function, parameter, minimum, maximum, count)    \
@@ -3465,7 +3465,7 @@ void expect_uint_in_range_count(#function,
 #parameter,
                                 uintmax_t minimum,
                                 uintmax_t maximum,
-                                size_t count);
+                                intmax_t count);
 #else
 #define expect_uint_in_range_count(                   \
     function, parameter, minimum, maximum, count)     \
@@ -3522,7 +3522,7 @@ void expect_not_in_range(#function, #parameter, uintmax_t minimum, uintmax_t max
  *
  * @see check_expected().
  */
-void expect_not_in_range_count(#function, #parameter, uintmax_t minimum, uintmax_t maximum, size_t count);
+void expect_not_in_range_count(#function, #parameter, uintmax_t minimum, uintmax_t maximum, intmax_t count);
 #else
 #define expect_not_in_range_count(function, parameter, minimum, maximum, \
                                   count) \
@@ -3581,7 +3581,7 @@ void expect_int_not_in_range_count(#function,
                                    #parameter,
                                    intmax_t minimum,
                                    intmax_t maximum,
-                                   size_t count);
+                                   intmax_t count);
 #else
 #define expect_int_not_in_range_count(                   \
     function, parameter, minimum, maximum, count)        \
@@ -3646,7 +3646,7 @@ void expect_uint_not_in_range_count(#function,
                                     #parameter,
                                     uintmax_t minimum,
                                     uintmax_t maximum,
-                                    size_t count);
+                                    intmax_t count);
 #else
 #define expect_uint_not_in_range_count(                   \
     function, parameter, minimum, maximum, count)         \
@@ -3707,7 +3707,7 @@ void expect_float_in_range(#function, #parameter, double minimum, double maximum
  *
  * @see check_expected_float()
  */
-void expect_float_in_range_count(#function, #parameter, double minimum, double maximum, double epsilon, size_t count);
+void expect_float_in_range_count(#function, #parameter, double minimum, double maximum, double epsilon, intmax_t count);
 #else
 #define expect_float_in_range_count(function, parameter, minimum, maximum, epsilon, count) \
     _expect_float_in_range(cmocka_tostring(function),           \
@@ -3768,7 +3768,7 @@ void expect_float_not_in_range(#function, #parameter, double minimum, double max
  *
  * @see check_expected().
  */
-void expect_float_not_in_range_count(#function, #parameter, double minimum, double maximum, double epsilon, size_t count);
+void expect_float_not_in_range_count(#function, #parameter, double minimum, double maximum, double epsilon, intmax_t count);
 #else
 #define expect_float_not_in_range_count(function, parameter, minimum, maximum, \
                                   epsilon, count) \
@@ -3800,7 +3800,7 @@ void expect_value(#function, #parameter, uintmax_t value);
 /**
  * @deprecated Use expect_int_value_count() or expect_uint_value_count()
  */
-void expect_value_count(#function, #parameter, uintmax_t value, size_t count);
+void expect_value_count(#function, #parameter, uintmax_t value, intmax_t count);
 #else
 #define expect_value_count(function, parameter, value, count)    \
     do {                                                         \
@@ -3858,7 +3858,7 @@ void expect_int_value(#function, #parameter, intmax_t value);
 void expect_int_value_count(#function,
 #parameter,
                             intmax_t value,
-                            size_t count);
+                            intmax_t count);
 #else
 #define expect_int_value_count(function, parameter, value, count) \
     _expect_int_value(cmocka_tostring(function),                  \
@@ -3912,7 +3912,7 @@ void expect_uint_value(#function, #parameter, uintmax_t value);
 void expect_uint_value_count(#function,
 #parameter,
                              uintmax_t value,
-                             size_t count);
+                             intmax_t count);
 #else
 #define expect_uint_value_count(function, parameter, value, count) \
     _expect_uint_value(cmocka_tostring(function),                  \
@@ -3965,7 +3965,7 @@ void expect_int_not_value(#function, #parameter, intmax_t value);
 void expect_int_not_value_count(#function,
                                 #parameter,
                                 intmax_t value,
-                                size_t count);
+                                intmax_t count);
 #else
 #define expect_int_not_value_count(function, parameter, value, count) \
     _expect_int_not_value(cmocka_tostring(function),                  \
@@ -4018,7 +4018,7 @@ void expect_uint_not_value(#function, #parameter, uintmax_t value);
 void expect_uint_not_value_count(#function,
                                  #parameter,
                                  uintmax_t value,
-                                 size_t count);
+                                 intmax_t count);
 #else
 #define expect_uint_not_value_count(function, parameter, value, count) \
     _expect_uint_not_value(cmocka_tostring(function),                  \
@@ -4048,7 +4048,7 @@ void expect_not_value(#function, #parameter, uintmax_t value);
 /**
  * @deprecated Use expect_int_not_value_count() or expect_uint_not_value_count()
  */
-void expect_not_value_count(#function, #parameter, uintmax_t value, size_t count);
+void expect_not_value_count(#function, #parameter, uintmax_t value, intmax_t count);
 #else
 #define expect_not_value_count(function, parameter, value, count)        \
     do {                                                                 \
@@ -4113,7 +4113,7 @@ void expect_float(#function, #parameter, double value, double epsilon);
  * @see expect_not_string()
  * @see expect_not_memory()
  */
-void expect_float_count(#function, #parameter, double value, double epsilon, size_t count);
+void expect_float_count(#function, #parameter, double value, double epsilon, intmax_t count);
 #else
 #define expect_float_count(function, parameter, value, epsilon, count) \
     _expect_float(cmocka_tostring(function), cmocka_tostring(parameter), __FILE__, __LINE__, \
@@ -4173,7 +4173,7 @@ void expect_not_float(#function, #parameter, double value, double epsilon);
  * @see expect_not_string()
  * @see expect_not_memory()
  */
-void expect_not_float_count(#function, #parameter, double value, double epsilon, size_t count);
+void expect_not_float_count(#function, #parameter, double value, double epsilon, intmax_t count);
 #else
 #define expect_not_float_count(function, parameter, value, epsilon, count) \
     _expect_not_float(cmocka_tostring(function),                           \
@@ -4239,7 +4239,7 @@ void expect_double_count(#function,
                          #parameter,
                          double value,
                          double epsilon,
-                         size_t count);
+                         intmax_t count);
 #else
 #define expect_double_count(function, parameter, value, epsilon, count) \
     _expect_double(cmocka_tostring(function),                           \
@@ -4305,7 +4305,7 @@ void expect_not_double_count(#function,
                              #parameter,
                              double value,
                              double epsilon,
-                             size_t count);
+                             intmax_t count);
 #else
 #define expect_not_double_count(function, parameter, value, epsilon, count) \
     _expect_not_double(cmocka_tostring(function),                           \
@@ -4357,7 +4357,7 @@ void expect_string(#function, #parameter, const char *string);
  *
  * @see check_expected().
  */
-void expect_string_count(#function, #parameter, const char *string, size_t count);
+void expect_string_count(#function, #parameter, const char *string, intmax_t count);
 #else
 #define expect_string_count(function, parameter, string, count) \
     _expect_string(cmocka_tostring(function), cmocka_tostring(parameter), __FILE__, __LINE__, \
@@ -4404,7 +4404,7 @@ void expect_not_string(#function, #parameter, const char *string);
  *
  * @see check_expected().
  */
-void expect_not_string_count(#function, #parameter, const char *string, size_t count);
+void expect_not_string_count(#function, #parameter, const char *string, intmax_t count);
 #else
 #define expect_not_string_count(function, parameter, string, count) \
     _expect_not_string(cmocka_tostring(function), cmocka_tostring(parameter), __FILE__, __LINE__, \
@@ -4454,7 +4454,7 @@ void expect_memory(#function, #parameter, void *memory, size_t size);
  *
  * @see check_expected().
  */
-void expect_memory_count(#function, #parameter, void *memory, size_t size, size_t count);
+void expect_memory_count(#function, #parameter, void *memory, size_t size, intmax_t count);
 #else
 #define expect_memory_count(function, parameter, memory, size, count) \
     _expect_memory(cmocka_tostring(function), cmocka_tostring(parameter), __FILE__, __LINE__, \
@@ -4505,7 +4505,7 @@ void expect_not_memory(#function, #parameter, void *memory, size_t size);
  *
  * @see check_expected().
  */
-void expect_not_memory_count(#function, #parameter, void *memory, size_t size, size_t count);
+void expect_not_memory_count(#function, #parameter, void *memory, size_t size, intmax_t count);
 #else
 #define expect_not_memory_count(function, parameter, memory, size, count) \
     _expect_not_memory(cmocka_tostring(function), cmocka_tostring(parameter), __FILE__, __LINE__, \
@@ -4566,7 +4566,7 @@ void expect_any_always(#function, #parameter);
  *
  * @see check_expected().
  */
-void expect_any_count(#function, #parameter, size_t count);
+void expect_any_count(#function, #parameter, intmax_t count);
 #else
 #define expect_any_count(function, parameter, count) \
     _expect_any(cmocka_tostring(function), cmocka_tostring(parameter), __FILE__, __LINE__, count)
@@ -5440,7 +5440,7 @@ void assert_float_in_range(double value, double minimum, double maximum, double 
 /**
  * @deprecated Use assert_int_in_set() or assert_uint_in_set()
  */
-void assert_in_set(uintmax_t value, uintmax_t values[], size_t count);
+void assert_in_set(uintmax_t value, uintmax_t values[], intmax_t count);
 #else
 #define assert_in_set(value, values, number_of_values)                        \
     do {                                                                      \
@@ -5464,7 +5464,7 @@ void assert_in_set(uintmax_t value, uintmax_t values[], size_t count);
  *
  * @param[in]  count  The size of the values array.
  */
-void assert_not_in_set(uintmax_t value, uintmax_t values[], size_t count);
+void assert_not_in_set(uintmax_t value, uintmax_t values[], intmax_t count);
 #else
 #define assert_not_in_set(value, values, number_of_values) \
     _assert_not_in_set(value, values, number_of_values, __FILE__, __LINE__)
@@ -5483,7 +5483,7 @@ void assert_not_in_set(uintmax_t value, uintmax_t values[], size_t count);
  *
  * @param[in]  count  The size of the values array.
  */
-void assert_int_in_set(intmax_t value, intmax_t values[], size_t count);
+void assert_int_in_set(intmax_t value, intmax_t values[], intmax_t count);
 #else
 #define assert_int_in_set(value, values, number_of_values) \
     if (number_of_values > 0) { \
@@ -5508,7 +5508,7 @@ void assert_int_in_set(intmax_t value, intmax_t values[], size_t count);
  *
  * @param[in]  count  The size of the values array.
  */
-void assert_int_not_in_set(intmax_t value, intmax_t values[], size_t count);
+void assert_int_not_in_set(intmax_t value, intmax_t values[], intmax_t count);
 #else
 #define assert_int_not_in_set(value, values, number_of_values) \
     if (number_of_values > 0) { \
@@ -5533,7 +5533,7 @@ void assert_int_not_in_set(intmax_t value, intmax_t values[], size_t count);
  *
  * @param[in]  count  The size of the values array.
  */
-void assert_uint_in_set(uintmax_t value, uintmax_t values[], size_t count);
+void assert_uint_in_set(uintmax_t value, uintmax_t values[], intmax_t count);
 #else
 #define assert_uint_in_set(value, values, number_of_values) \
     if (number_of_values > 0) { \
@@ -5558,7 +5558,7 @@ void assert_uint_in_set(uintmax_t value, uintmax_t values[], size_t count);
  *
  * @param[in]  count  The size of the values array.
  */
-void assert_uint_not_in_set(uintmax_t value, uintmax_t values[], size_t count);
+void assert_uint_not_in_set(uintmax_t value, uintmax_t values[], intmax_t count);
 #else
 #define assert_uint_not_in_set(value, values, number_of_values) \
     if (number_of_values > 0) { \
@@ -5585,7 +5585,7 @@ void assert_uint_not_in_set(uintmax_t value, uintmax_t values[], size_t count);
  *
  * @param[in]  epsilon  The epsilon used as margin for float comparison.
  */
-void assert_float_in_set(double value, double values[], size_t count, double epsilon);
+void assert_float_in_set(double value, double values[], intmax_t count, double epsilon);
 #else
 #define assert_float_in_set(value, values, number_of_values, epsilon) \
     if (number_of_values > 0) { \
@@ -5612,7 +5612,7 @@ void assert_float_in_set(double value, double values[], size_t count, double eps
  *
  * @param[in]  epsilon  The epsilon used as margin for float comparison.
  */
-void assert_float_not_in_set(double value, double values[], size_t count, double epsilon);
+void assert_float_not_in_set(double value, double values[], intmax_t count, double epsilon);
 #else
 #define assert_float_not_in_set(value, values, number_of_values, epsilon) \
     if (number_of_values > 0) { \
@@ -6746,14 +6746,14 @@ void _expect_int_in_set(const char *const function,
                         const size_t line,
                         const intmax_t values[],
                         const size_t number_of_values,
-                        const size_t count);
+                        const intmax_t count);
 void _expect_uint_in_set(const char *const function,
                          const char *const parameter,
                          const char *const file,
                          const size_t line,
                          const uintmax_t values[],
                          const size_t number_of_values,
-                         const size_t count);
+                         const intmax_t count);
 
 void _expect_float_in_set(const char *const function,
                           const char *const parameter,
@@ -6762,7 +6762,7 @@ void _expect_float_in_set(const char *const function,
                           const double values[],
                           const size_t number_of_values,
                           const double epsilon,
-                          const size_t count);
+                          const intmax_t count);
 
 void _expect_not_in_set(
     const char* const function, const char* const parameter,
@@ -6774,19 +6774,19 @@ void _expect_int_not_in_set(const char *const function,
                             const size_t line,
                             const intmax_t values[],
                             const size_t number_of_values,
-                            const size_t count);
+                            const intmax_t count);
 void _expect_uint_not_in_set(const char *const function,
                              const char *const parameter,
                              const char *const file,
                              const size_t line,
                              const uintmax_t values[],
                              const size_t number_of_values,
-                             const size_t count);
+                             const intmax_t count);
 
 void _expect_float_not_in_set(
     const char* const function, const char* const parameter,
     const char* const file, const size_t line, const double values[],
-    const size_t number_of_values, const double epsilon, const size_t count);
+    const size_t number_of_values, const double epsilon, const intmax_t count);
 
 void _expect_in_range(const char *const function,
                       const char *const parameter,
@@ -6801,14 +6801,14 @@ void _expect_int_in_range(const char *const function,
                           const size_t line,
                           const intmax_t minimum,
                           const intmax_t maximum,
-                          const size_t count);
+                          const intmax_t count);
 void _expect_uint_in_range(const char *const function,
                            const char *const parameter,
                            const char *const file,
                            const size_t line,
                            const uintmax_t minimum,
                            const uintmax_t maximum,
-                           const size_t count);
+                           const intmax_t count);
 void _expect_not_in_range(
     const char* const function, const char* const parameter,
     const char* const file, const int line,
@@ -6820,14 +6820,14 @@ void _expect_int_not_in_range(const char *const function,
                               const size_t line,
                               const intmax_t minimum,
                               const intmax_t maximum,
-                              const size_t count);
+                              const intmax_t count);
 void _expect_uint_not_in_range(const char *const function,
                                const char *const parameter,
                                const char *const file,
                                const size_t line,
                                const uintmax_t minimum,
                                const uintmax_t maximum,
-                               const size_t count);
+                               const intmax_t count);
 void _expect_float_in_range(
     const char* const function, const char* const parameter,
     const char* const file, const int line,
@@ -6848,25 +6848,25 @@ void _expect_int_value(const char *const function,
                        const char *const file,
                        const size_t line,
                        const intmax_t value,
-                       const size_t count);
+                       const intmax_t count);
 void _expect_uint_value(const char *const function,
                         const char *const parameter,
                         const char *const file,
                         const size_t line,
                         const uintmax_t value,
-                        const size_t count);
+                        const intmax_t count);
 void _expect_int_not_value(const char *const function,
                            const char *const parameter,
                            const char *const file,
                            const size_t line,
                            const intmax_t value,
-                           const size_t count);
+                           const intmax_t count);
 void _expect_uint_not_value(const char *const function,
                             const char *const parameter,
                             const char *const file,
                             const size_t line,
                             const uintmax_t value,
-                            const size_t count);
+                            const intmax_t count);
 void _expect_not_value(
     const char* const function, const char* const parameter,
     const char* const file, const int line, const uintmax_t value,
