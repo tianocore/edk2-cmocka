@@ -3397,7 +3397,7 @@ void expect_int_in_range(#function,
  * @see check_expected().
  */
 void expect_int_in_range_count(#function,
-#parameter,
+                               #parameter,
                                intmax_t minimum,
                                intmax_t maximum,
                                intmax_t count);
@@ -3462,7 +3462,7 @@ void expect_uint_in_range(#function,
  * @see check_expected().
  */
 void expect_uint_in_range_count(#function,
-#parameter,
+                                #parameter,
                                 uintmax_t minimum,
                                 uintmax_t maximum,
                                 intmax_t count);
@@ -3856,7 +3856,7 @@ void expect_int_value(#function, #parameter, intmax_t value);
  * @see check_expected().
  */
 void expect_int_value_count(#function,
-#parameter,
+                            #parameter,
                             intmax_t value,
                             intmax_t count);
 #else
@@ -3910,7 +3910,7 @@ void expect_uint_value(#function, #parameter, uintmax_t value);
  * @see check_expected().
  */
 void expect_uint_value_count(#function,
-#parameter,
+                             #parameter,
                              uintmax_t value,
                              intmax_t count);
 #else
