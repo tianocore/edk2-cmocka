@@ -13,7 +13,7 @@ static void my_vprint(const char * const format, va_list args)
     /* Note: a real implementation would need to deal with threading as well
      * as running out of buffer space. */
     size_t remaining = sizeof(g_buffer) - idx;
-    idx += vsnprintf(g_buffer + idx, remaining, format, args);
+    idx += (size_t)vsnprintf(g_buffer + idx, remaining, format, args);
     g_my_msg_count++;
 }
 
@@ -23,7 +23,7 @@ static void my_vprint_error(const char * const format, va_list args)
     /* Note: a real implementation would need to deal with threading as well
      * as running out of buffer space. */
     size_t remaining = sizeof(g_buffer) - idx;
-    idx += vsnprintf(g_buffer + idx, remaining, format, args);
+    idx += (size_t)vsnprintf(g_buffer + idx, remaining, format, args);
     g_my_err_count++;
 }
 

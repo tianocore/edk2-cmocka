@@ -284,7 +284,7 @@ int perform_operation(int number_of_arguments,
     }
 
     /* Allocate array for intermediate results */
-    *intermediate_values = malloc(((number_of_arguments - 1) / 2) *
+    *intermediate_values = malloc((size_t)((number_of_arguments - 1) / 2) *
                                   sizeof(**intermediate_values));
     if (*intermediate_values == NULL) {
         fprintf(stderr, "Failed to allocate memory for intermediate values\n");

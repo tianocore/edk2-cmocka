@@ -35,15 +35,15 @@ static void test_will_set_errno_fails_for_no_calls(void **state)
 static void test_will_set_errno_count_fails_for_unreturned_items(void **state)
 {
     int value;
-    size_t numberOfCalls;
+    int numberOfCalls;
 
     (void) state;
 
     value = rand();
-    numberOfCalls = (size_t) ((rand()) % 20 + 2);
+    numberOfCalls = (rand()) % 20 + 2;
 
     will_set_errno_count(mock_errno_function, value, numberOfCalls);
-    mock_function_call_times(numberOfCalls - 1u, value);
+    mock_function_call_times((size_t)(numberOfCalls - 1), value);
 }
 
 static void test_will_set_errno_always_fails_for_no_calls(void **state)

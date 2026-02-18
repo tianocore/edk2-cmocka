@@ -28,10 +28,10 @@ void test_multiple_runs_sets_errno(void **state)
 {
     (void) state; /* unused */
 
-    size_t count = 3;
+    int count = 3;
     will_set_errno_count(sets_errno, -12, count);
 
-    for (size_t i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         errno = 0;
         sets_errno();
         assert_int_equal(errno, -12);

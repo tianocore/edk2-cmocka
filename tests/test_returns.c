@@ -124,7 +124,7 @@ static void test_will_return_uint(void **state)
 
     (void)state; /* unused */
 
-    value = rand();
+    value = (uintmax_t)rand(); /* 0-RAND_MAX can be safely cast */
     will_return_uint(mock_function_uint, value);
     assert_uint_equal(value, mock_function_uint());
 }

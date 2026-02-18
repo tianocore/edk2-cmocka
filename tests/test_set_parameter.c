@@ -102,7 +102,7 @@ static void test_will_return_uint(void **state)
 
     (void)state; /* unused */
 
-    value = rand();
+    value = (uintmax_t)rand(); /* 0-RAND_MAX can be safely cast */
     will_set_parameter_uint(mock_function_uint, result, value);
     uintmax_t result_param = UINTMAX_MAX;
     mock_function_uint(&result_param);

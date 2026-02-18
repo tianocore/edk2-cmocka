@@ -38,7 +38,7 @@ static void torture_test_malloc(void **state)
     str = (char *)test_malloc(str_len);
     assert_non_null(str);
 
-    len = snprintf(str, str_len, "test string");
+    len = (size_t)snprintf(str, str_len, "test string");
     assert_int_equal(len, 11);
 
     len = strlen(str);
@@ -60,7 +60,7 @@ static void torture_test_realloc(void **state)
     str = (char *)test_malloc(str_len);
     assert_non_null(str);
 
-    len = snprintf(str, str_len, "test string 123");
+    len = (size_t)snprintf(str, str_len, "test string 123");
     assert_int_equal(len, 15);
 
     len = strlen(str);

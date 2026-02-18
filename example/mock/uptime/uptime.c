@@ -26,11 +26,11 @@
 static char *calc_uptime(void)
 {
     uint32_t up_minutes, up_hours, up_days, up_weeks, up_years;
-    int pos = 0;
+    size_t pos = 0;
     size_t comma = 0;
     double uptime_secs, idle_secs;
     char buf[1024] = {0};
-    int up;
+    int up, ret;
 
     up = uptime("/proc/uptime", &uptime_secs, &idle_secs);
     if (up == 0) {
@@ -41,7 +41,11 @@ static char *calc_uptime(void)
     up_weeks = ((uint32_t)uptime_secs / (60 * 60 * 24 * 7)) % 52;
     up_days = ((uint32_t)uptime_secs / (60 * 60 * 24)) % 7;
 
-    pos += snprintf(buf + pos, sizeof(buf) - pos, "up ");
+    ret = snprintf(buf + pos, sizeof(buf) - pos, "up ");
+    if (ret < 0) {
+        return NULL;
+    }
+    pos += (size_t)ret;
 
     up_minutes = (uint32_t)uptime_secs / 60;
     up_hours = up_minutes / 60;
@@ -49,46 +53,65 @@ static char *calc_uptime(void)
     up_minutes = up_minutes % 60;
 
     if (up_years > 0) {
-        pos += snprintf(buf + pos, sizeof(buf) - pos,
-                        "%u %s",
-                        up_years,
-                        up_years > 1 ? "years" : "year");
+        ret = snprintf(buf + pos, sizeof(buf) - pos,
+                       "%u %s",
+                       up_years,
+                       up_years > 1 ? "years" : "year");
+        if (ret < 0) {
+            return NULL;
+        }
+        pos += (size_t)ret;
         comma++;
     }
 
     if (up_weeks > 0) {
-        pos += snprintf(buf + pos, sizeof(buf) - pos,
-                        "%s%u %s",
-                        comma > 0 ? ", " : "",
-                        up_weeks,
-                        up_weeks > 1 ? "weeks" : "week");
+        ret = snprintf(buf + pos, sizeof(buf) - pos,
+                       "%s%u %s",
+                       comma > 0 ? ", " : "",
+                       up_weeks,
+                       up_weeks > 1 ? "weeks" : "week");
+        if (ret < 0) {
+            return NULL;
+        }
+        pos += (size_t)ret;
         comma++;
     }
 
     if (up_days > 0) {
-        pos += snprintf(buf + pos, sizeof(buf) - pos,
-                        "%s%u %s",
-                        comma > 0 ? ", " : "",
-                        up_days,
-                        up_days > 1 ? "days" : "day");
+        ret = snprintf(buf + pos, sizeof(buf) - pos,
+                       "%s%u %s",
+                       comma > 0 ? ", " : "",
+                       up_days,
+                       up_days > 1 ? "days" : "day");
+        if (ret < 0) {
+            return NULL;
+        }
+        pos += (size_t)ret;
         comma++;
     }
 
     if (up_hours > 0) {
-        pos += snprintf(buf + pos, sizeof(buf) - pos,
-                        "%s%u %s",
-                        comma > 0 ? ", " : "",
-                        up_hours,
-                        up_hours > 1 ? "hours" : "hour");
+        ret = snprintf(buf + pos, sizeof(buf) - pos,
+                       "%s%u %s",
+                       comma > 0 ? ", " : "",
+                       up_hours,
+                       up_hours > 1 ? "hours" : "hour");
+        if (ret < 0) {
+            return NULL;
+        }
+        pos += (size_t)ret;
         comma++;
     }
 
     if (up_minutes > 0 || (up_minutes == 0 && uptime_secs < 60)) {
-        pos += snprintf(buf + pos, sizeof(buf) - pos,
-                        "%s%u %s",
-                        comma > 0 ? ", " : "",
-                        up_minutes,
-                        up_minutes != 1 ? "minutes" : "minute");
+        ret = snprintf(buf + pos, sizeof(buf) - pos,
+                       "%s%u %s",
+                       comma > 0 ? ", " : "",
+                       up_minutes,
+                       up_minutes != 1 ? "minutes" : "minute");
+        if (ret < 0) {
+            return NULL;
+        }
         comma++;
     }
 

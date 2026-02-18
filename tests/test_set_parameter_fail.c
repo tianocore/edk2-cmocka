@@ -43,15 +43,15 @@ static void test_will_return_fails_for_no_calls(void **state)
 static void test_will_return_count_fails_for_unreturned_items(void **state)
 {
     int value;
-    size_t numberOfCalls;
+    int numberOfCalls;
 
     (void) state;
 
     value = rand();
-    numberOfCalls = (size_t) ((rand()) % 20 + 2);
+    numberOfCalls = (rand()) % 20 + 2;
 
     will_set_parameter_count(mock_function, result, value, numberOfCalls);
-    mock_function_call_times(numberOfCalls - 1u, value);
+    mock_function_call_times((size_t)(numberOfCalls - 1), value);
 }
 
 static void test_will_return_always_fails_for_no_calls(void **state)

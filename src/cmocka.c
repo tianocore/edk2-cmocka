@@ -605,7 +605,7 @@ static bool c_strreplace(char *src,
     const size_t pattern_len = strlen(pattern);
     const size_t repl_len = strlen(repl);
     do {
-        size_t offset = p - src;
+        size_t offset = (size_t)(p - src);
         size_t l  = strlen(src);
 
         /* overflow check */
@@ -3881,14 +3881,15 @@ static void vcmocka_print_error(const char* const format, va_list args)
     char buffer[256];
     size_t msg_len = 0;
     va_list ap;
-    int len;
+    int ret;
     va_copy(ap, args);
 
-    len = vsnprintf(buffer, sizeof(buffer), format, args);
-    if (len < 0) {
+    ret = vsnprintf(buffer, sizeof(buffer), format, args);
+    if (ret < 0) {
         /* TODO */
         goto end;
     }
+    size_t len = (size_t)ret;
 
     if (cm_error_message == NULL) {
         /* CREATE MESSAGE */
@@ -3930,7 +3931,7 @@ static void vcm_free_error(char *err_msg)
 #ifdef HAVE_BUILTIN_ALIGN_DOWN
 #define ALIGN_DOWN(x, a) (__builtin_align_down((x), (a)))
 #else
-#define ALIGN_DOWN(x, a) ((uintptr_t)(x) & ~((a)-1))
+#define ALIGN_DOWN(x, a) ((uintptr_t)(x) & ~((uintptr_t)(a)-1))
 #endif
 
 /* Use the real malloc in this function. */
@@ -4798,7 +4799,7 @@ void cmocka_set_message_output(uint32_t output)
     uint32_t format_count = 0;
 
     /* Count how many non-XML output formats are set */
-    non_xml_formats = output & ~CM_OUTPUT_XML;
+    non_xml_formats = output & ~(uint32_t)CM_OUTPUT_XML;
 
     /* Count the number of bits set in non_xml_formats */
     while (non_xml_formats) {
