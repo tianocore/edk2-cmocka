@@ -4017,12 +4017,12 @@ void _test_free(void* const ptr, const char* file, const int line) {
                 const char diff = guard[j] - MALLOC_GUARD_PATTERN;
                 if (diff) {
                     cmocka_print_error(SOURCE_LOCATION_FORMAT
-                                   ": error: Guard block of %p size=%lu is corrupt\n"
+                                   ": error: Guard block of %p size=%zu is corrupt\n"
                                    SOURCE_LOCATION_FORMAT ": note: allocated here at %p\n",
                                    file,
                                    line,
                                    ptr,
-                                   (unsigned long)block_info.data->size,
+                                   block_info.data->size,
                                    block_info.data->location.file,
                                    block_info.data->location.line,
                                    (void *)&guard[j]);
@@ -4471,13 +4471,13 @@ static void cmprintf_group_finish_xml(const char *group_name,
 
     fprintf(fp, "<testsuites>\n");
     fprintf(fp, "  <testsuite name=\"%s\" time=\"%.3f\" "
-                "tests=\"%u\" failures=\"%u\" errors=\"%u\" skipped=\"%u\" >\n",
+                "tests=\"%zu\" failures=\"%zu\" errors=\"%zu\" skipped=\"%zu\" >\n",
                 group_name_escaped,
                 total_runtime, /* seconds */
-                (unsigned)total_executed,
-                (unsigned)total_failed,
-                (unsigned)total_errors,
-                (unsigned)total_skipped);
+                total_executed,
+                total_failed,
+                total_errors,
+                total_skipped);
 
     for (i = 0; i < total_executed; i++) {
         struct CMUnitTestState *cmtest = &cm_tests[i];
@@ -4542,8 +4542,8 @@ static void cmprintf_group_finish_standard(const char *group_name,
     print_message("[==========] %s: %zu test(s) run.\n",
                   group_name,
                   total_executed);
-    print_error("[  PASSED  ] %u test(s).\n",
-                (unsigned)(total_passed));
+    print_error("[  PASSED  ] %zu test(s).\n",
+                total_passed);
 
     if (total_skipped) {
         print_error("[  SKIPPED ] %s: %zu test(s), listed below:\n",
@@ -4612,7 +4612,7 @@ static void cmprintf_group_start_tap(const size_t num_tests)
         version_printed = true;
     }
 
-    print_message("1..%u\n", (unsigned)num_tests);
+    print_message("1..%zu\n", num_tests);
 }
 
 static void cmprintf_group_finish_tap(const char *group_name,
@@ -4636,11 +4636,11 @@ static void cmprintf_tap(enum cm_printf_type type,
     case PRINTF_TEST_START:
         break;
     case PRINTF_TEST_SUCCESS:
-        print_message("ok %u - %s\n", (unsigned)test_number, test_name);
+        print_message("ok %zu - %s\n", test_number, test_name);
         break;
     case PRINTF_TEST_FAILURE:
     case PRINTF_TEST_ERROR:
-        print_message("not ok %u - %s\n", (unsigned)test_number, test_name);
+        print_message("not ok %zu - %s\n", test_number, test_name);
         if (error_message != NULL) {
             char *msg;
             char *p;
@@ -4688,7 +4688,7 @@ static void cmprintf_tap(enum cm_printf_type type,
         }
         break;
     case PRINTF_TEST_SKIPPED:
-        print_message("ok %u - %s # SKIP\n", (unsigned)test_number, test_name);
+        print_message("ok %zu - %s # SKIP\n", test_number, test_name);
         break;
     }
 }
