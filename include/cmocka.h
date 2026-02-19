@@ -6163,7 +6163,7 @@ int cmocka_run_group_tests_name(const char *group_name,
  *
  * @code
  * #ifdef UNIT_TESTING
- * extern void* _test_malloc(const size_t size, const char* file, const int line);
+ * extern void* _test_malloc(const size_t size, const char* file, const size_t line);
  *
  * #define malloc(size) _test_malloc(size, __FILE__, __LINE__)
  * #endif
@@ -6273,7 +6273,7 @@ void test_free(void *ptr);
  * @code
  * #ifdef UNIT_TESTING
  * extern void mock_assert(const int result, const char* const expression,
- *                         const char * const file, const int line);
+ *                         const char * const file, const size_t line);
  *
  * #undef assert
  * #define assert(expression) \
@@ -6290,7 +6290,7 @@ void test_free(void *ptr);
  * @see expect_assert_failure
  */
 void mock_assert(const int result, const char* const expression,
-                 const char * const file, const int line);
+                 const char * const file, const size_t line);
 
 #ifdef DOXYGEN
 /**
@@ -6493,7 +6493,7 @@ struct CMUnitTest {
  */
 typedef struct SourceLocation {
     const char* file;
-    int line;
+    size_t line;
 } SourceLocation;
 
 /**
@@ -6704,13 +6704,13 @@ CMOCKA_DLLEXTERN extern const char * global_last_failed_assert;
 /* Retrieves a value for the given function, as set by "will_return". */
 CMockaValueData _mock(const char *const function,
                       const char *const file,
-                      const int line,
+                      const size_t line,
                       const char *name);
 
 CMockaValueData _mock_parameter(const char *const function,
                       const char *name,
                       const char *const file,
-                      const int line,
+                      const size_t line,
                       const char *type);
 
 bool _has_mock(const char *const function);
@@ -6718,16 +6718,16 @@ bool _has_mock(const char *const function);
 void _expect_function_call(
     const char * const function_name,
     const char * const file,
-    const int line,
+    const size_t line,
     const int count);
 
 void _function_called(const char * const function, const char* const file,
-                          const int line);
+                          const size_t line);
 
 /* Old API function using uintmax_t */
 void _expect_check(
     const char* const function, const char* const parameter,
-    const char* const file, const int line,
+    const char* const file, const size_t line,
     const CheckParameterValue check_function,
     const uintmax_t check_data, CheckParameterEvent * const event,
     const int count) CMOCKA_DEPRECATED;
@@ -6735,7 +6735,7 @@ void _expect_check(
 /* New API function using CMockaValueData */
 void _expect_check_data(
     const char* const function, const char* const parameter,
-    const char* const file, const int line,
+    const char* const file, const size_t line,
     const CheckParameterValueData check_function,
     const CMockaValueData check_data, CheckParameterEventData * const event,
     const int count);
@@ -6766,7 +6766,7 @@ void _expect_float_in_set(const char *const function,
 
 void _expect_not_in_set(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const uintmax_t values[],
+    const char* const file, const size_t line, const uintmax_t values[],
     const size_t number_of_values, const int count);
 void _expect_int_not_in_set(const char *const function,
                             const char *const parameter,
@@ -6791,7 +6791,7 @@ void _expect_float_not_in_set(
 void _expect_in_range(const char *const function,
                       const char *const parameter,
                       const char *const file,
-                      const int line,
+                      const size_t line,
                       const uintmax_t minimum,
                       const uintmax_t maximum,
                       const int count) CMOCKA_DEPRECATED;
@@ -6811,7 +6811,7 @@ void _expect_uint_in_range(const char *const function,
                            const intmax_t count);
 void _expect_not_in_range(
     const char* const function, const char* const parameter,
-    const char* const file, const int line,
+    const char* const file, const size_t line,
     const uintmax_t minimum,
     const uintmax_t maximum, const int count);
 void _expect_int_not_in_range(const char *const function,
@@ -6830,18 +6830,18 @@ void _expect_uint_not_in_range(const char *const function,
                                const intmax_t count);
 void _expect_float_in_range(
     const char* const function, const char* const parameter,
-    const char* const file, const int line,
+    const char* const file, const size_t line,
     const double minimum, const double maximum, const double epsilon,
     const int count);
 void _expect_float_not_in_range(
     const char* const function, const char* const parameter,
-    const char* const file, const int line,
+    const char* const file, const size_t line,
     const double minimum, const double maximum, const double epsilon,
     const int count);
 
 void _expect_value(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const uintmax_t value,
+    const char* const file, const size_t line, const uintmax_t value,
     const int count);
 void _expect_int_value(const char *const function,
                        const char *const parameter,
@@ -6869,210 +6869,210 @@ void _expect_uint_not_value(const char *const function,
                             const intmax_t count);
 void _expect_not_value(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const uintmax_t value,
+    const char* const file, const size_t line, const uintmax_t value,
     const int count);
 
 void _expect_float(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const double value,
+    const char* const file, const size_t line, const double value,
     const double epsilon, const int count);
 void _expect_not_float(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const double value,
+    const char* const file, const size_t line, const double value,
     const double epsilon, const int count);
 
 void _expect_double(const char *const function,
                     const char *const parameter,
                     const char *const file,
-                    const int line,
+                    const size_t line,
                     const double value,
                     const double epsilon,
                     const int count);
 void _expect_not_double(const char *const function,
                         const char *const parameter,
                         const char *const file,
-                        const int line,
+                        const size_t line,
                         const double value,
                         const double epsilon,
                         const int count);
 
 void _expect_string(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const char* string,
+    const char* const file, const size_t line, const char* string,
     const int count);
 void _expect_not_string(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const char* string,
+    const char* const file, const size_t line, const char* string,
     const int count);
 
 void _expect_memory(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const void* const memory,
+    const char* const file, const size_t line, const void* const memory,
     const size_t size, const int count);
 void _expect_not_memory(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const void* const memory,
+    const char* const file, const size_t line, const void* const memory,
     const size_t size, const int count);
 
 void _expect_any(
     const char* const function, const char* const parameter,
-    const char* const file, const int line, const int count);
+    const char* const file, const size_t line, const int count);
 
 void _check_expected(
     const char * const function_name, const char * const parameter_name,
-    const char* file, const int line, const CMockaValueData value);
+    const char* file, const size_t line, const CMockaValueData value);
 
 void _will_return(const char *const function_name,
                   const char *const file,
-                  const int line,
+                  const size_t line,
                   const char *name,
                   const CMockaValueData value,
                   const int count);
 void _will_set_parameter(const char *const function_name,
                   const char *name,
                   const char *const file,
-                  const int line,
+                  const size_t line,
                   const char *type,
                   const CMockaValueData value,
                   const int count);
 void _assert_true(const uintmax_t result,
                   const char* const expression,
-                  const char * const file, const int line);
+                  const char * const file, const size_t line);
 void _assert_false(const uintmax_t result,
                    const char * const expression,
-                   const char * const file, const int line);
+                   const char * const file, const size_t line);
 void _assert_return_code(const intmax_t result,
                          const int32_t error,
                          const char * const expression,
                          const char * const file,
-                         const int line);
+                         const size_t line);
 void _assert_float_equal(const float a, const float n,
 		const float epsilon, const char* const file,
-		const int line);
+		const size_t line);
 void _assert_float_not_equal(const float a, const float n,
 		const float epsilon, const char* const file,
-		const int line);
+		const size_t line);
 void _assert_double_equal(const double a, const double n,
 		const double epsilon, const char* const file,
-		const int line);
+		const size_t line);
 void _assert_double_not_equal(const double a, const double n,
 		const double epsilon, const char* const file,
-		const int line);
+		const size_t line);
 void _assert_int_equal(const intmax_t a,
                        const intmax_t b,
                        const char * const file,
-                       const int line);
+                       const size_t line);
 void _assert_int_not_equal(const intmax_t a,
                            const intmax_t b,
                            const char * const file,
-                           const int line);
+                           const size_t line);
 void _assert_uint_equal(const uintmax_t a,
                         const uintmax_t b,
                         const char * const file,
-                        const int line);
+                        const size_t line);
 void _assert_uint_not_equal(const uintmax_t a,
                             const uintmax_t b,
                             const char * const file,
-                            const int line);
+                            const size_t line);
 CMOCKA_NO_ACCESS_ATTRIBUTE
 void _assert_ptr_equal_msg(const void *a,
                            const void *b,
                            const char *const file,
-                           const int line,
+                           const size_t line,
                            const char *const msg);
 CMOCKA_NO_ACCESS_ATTRIBUTE
 void _assert_ptr_not_equal_msg(const void *a,
                                const void *b,
                                const char *const file,
-                               const int line,
+                               const size_t line,
                                const char *const msg);
 void _assert_string_equal(const char * const a, const char * const b,
-                          const char * const file, const int line);
+                          const char * const file, const size_t line);
 void _assert_string_not_equal(const char * const a, const char * const b,
-                              const char *file, const int line);
+                              const char *file, const size_t line);
 void _assert_memory_equal(const void * const a, const void * const b,
                           const size_t size, const char* const file,
-                          const int line);
+                          const size_t line);
 void _assert_memory_not_equal(const void * const a, const void * const b,
                               const size_t size, const char* const file,
-                              const int line);
+                              const size_t line);
 void _assert_int_in_range(const intmax_t value,
                           const intmax_t minimum,
                           const intmax_t maximum,
                           const char* const file,
-                          const int line);
+                          const size_t line);
 void _assert_int_not_in_range(const intmax_t value,
                               const intmax_t minimum,
                               const intmax_t maximum,
                               const char *const file,
-                              const int line);
+                              const size_t line);
 void _assert_uint_in_range(const uintmax_t value,
                            const uintmax_t minimum,
                            const uintmax_t maximum,
                            const char* const file,
-                           const int line);
+                           const size_t line);
 void _assert_uint_not_in_range(const uintmax_t value,
                            const uintmax_t minimum,
                            const uintmax_t maximum,
                            const char* const file,
-                           const int line);
+                           const size_t line);
 void _assert_float_in_range(const double value,
                             const double minimum,
                             const double maximum,
                             const double epsilon,
                             const char* const file,
-                            const int line);
+                            const size_t line);
 void _assert_float_not_in_range(const double value,
                                 const double minimum,
                                 const double maximum,
                                 const double epsilon,
                                 const char* const file,
-                                const int line);
+                                const size_t line);
 void _assert_not_in_set(
     const uintmax_t value, const uintmax_t values[],
-    const size_t number_of_values, const char* const file, const int line);
+    const size_t number_of_values, const char* const file, const size_t line);
 void _assert_int_in_set(const intmax_t value,
                         const intmax_t values[],
                         const size_t number_of_values,
                         const char *const file,
-                        const int line);
+                        const size_t line);
 void _assert_int_not_in_set(const intmax_t value,
                             const intmax_t values[],
                             const size_t number_of_values,
                             const char *const file,
-                            const int line);
+                            const size_t line);
 void _assert_uint_in_set(const uintmax_t value,
                          const uintmax_t values[],
                          const size_t number_of_values,
                          const char *const file,
-                         const int line);
+                         const size_t line);
 void _assert_uint_not_in_set(const uintmax_t value,
                              const uintmax_t values[],
                              const size_t number_of_values,
                              const char *const file,
-                             const int line);
+                             const size_t line);
 void _assert_float_in_set(const double value,
                           const double values[],
                           const size_t number_of_values,
                           const double epsilon,
                           const char *const file,
-                          const int line);
+                          const size_t line);
 void _assert_float_not_in_set(const double value,
                               const double values[],
                               const size_t number_of_values,
                               const double epsilon,
                               const char *const file,
-                              const int line);
+                              const size_t line);
 
-void* _test_malloc(const size_t size, const char* file, const int line);
-void* _test_realloc(void *ptr, const size_t size, const char* file, const int line);
+void* _test_malloc(const size_t size, const char* file, const size_t line);
+void* _test_realloc(void *ptr, const size_t size, const char* file, const size_t line);
 void* _test_calloc(const size_t number_of_elements, const size_t size,
-                   const char* file, const int line);
-void _test_free(void* const ptr, const char* file, const int line);
+                   const char* file, const size_t line);
+void _test_free(void* const ptr, const char* file, const size_t line);
 
-CMOCKA_NORETURN void _fail(const char * const file, const int line);
+CMOCKA_NORETURN void _fail(const char * const file, const size_t line);
 
-CMOCKA_NORETURN void _skip(const char * const file, const int line);
+CMOCKA_NORETURN void _skip(const char * const file, const size_t line);
 
 CMOCKA_NORETURN void _stop(void);
 
